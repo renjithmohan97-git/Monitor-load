@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Function to get current date and time
+get_timestamp() {
+    date +"%Y-%m-%d %H:%M:%S"
+}
+
+# Main loop to monitor and save load info
+while true; do
+    # Get current load average
+    loadavg=$(uptime | awk -F'average:' '{print $2}')
+
+    # Get current timestamp
+    timestamp=$(get_timestamp)
+
+    # Save load info to file
+    echo "Timestamp: $timestamp Load Average: $loadavg" >> loadinfo.txt
+
+    # Wait for 2 hours (7200 seconds)
+    sleep 7200
+done
